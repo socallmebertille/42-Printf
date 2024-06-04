@@ -6,30 +6,28 @@
 /*   By: saberton <saberton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:58:17 by saberton          #+#    #+#             */
-/*   Updated: 2024/06/03 13:13:09 by saberton         ###   ########.fr       */
+/*   Updated: 2024/06/04 20:28:37 by saberton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-int ft_putchar(va_list args)
+int ft_putchar(char c)
 {
-	char	c;
-
-	if (!args)
-		return (0);
-	c = (char)args;
 	write(1, &c, 1);
 	return (1);
 }
-int	ft_pustr(va_list args)
+int	ft_putstr(char *str)
 {
-	char	*str;
+	int	i;
 
-	if (!args)
-		return (0);
-	str = (char *)args;
-	while(*str)
-		ft_putchar(*str++);
-	return (1);
+	i = 0;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while(str[i])
+		ft_putchar(str[i++]);
+	return (i);
 }
