@@ -6,7 +6,7 @@
 /*   By: saberton <saberton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 19:01:31 by saberton          #+#    #+#             */
-/*   Updated: 2024/06/04 20:32:26 by saberton         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:28:40 by saberton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int ft_check_var(char format, va_list args)
 		return (ft_putchar(va_arg(args, int)));
 	else if (format == 's')
 		return (ft_putstr(va_arg(args, char *)));
-	/*else if (format == 'p')
-		return (ft_print_ptrhex(args));*/
+	else if (format == 'p')
+		return (ft_print_ptr(HEX_BASE_MIN, va_arg(args, void *), 16));
 	else if (format == 'd' || format == 'i')
-		return (ft_putnbr_base(DEC_BASE, va_arg(args, int), 10));
+		return (ft_putnbr(DEC_BASE, va_arg(args, int), 10));
 	else if (format == 'u')
-		return (ft_putnbr_uns_dec(va_arg(args, int)));
+		return (ft_putnbr_base(DEC_BASE, va_arg(args, int), 10));
 	else if (format == 'x')
 		return (ft_putnbr_base(HEX_BASE_MIN,va_arg(args, int), 16));
 	else if (format == 'X')
@@ -58,35 +58,39 @@ int	ft_printf(const char *format, ...)
 }
 
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
-	char	*ptr = "Hola que tal";
+	char	*ptr = NULL;
+	unsigned long	nb = ULONG_MAX;
+	unsigned long	*p = &nb;
 
 	printf(" %d : \n", printf("%c", '0' - 256));
 	ft_printf(" %d\n", ft_printf("%c", '0' - 256));
-	printf("------------------------------\n");
+	ft_printf("------------------------------\n");
 	printf(" %d : \n", printf("%s", ptr));
 	ft_printf(" %d\n", ft_printf("%s", ptr));
-	printf("------------------------------\n");
+	ft_printf("------------------------------\n");
 	printf(" %d : \n", printf("%d", 10));
 	ft_printf(" %d\n", ft_printf("%d", 10));
-	printf("------------------------------\n");
+	ft_printf("------------------------------\n");
 	printf(" %d : \n", printf("%i", -101));
 	ft_printf(" %d\n", ft_printf("%i", -101));
-	printf("------------------------------\n");
-	printf(" %d : \n", printf("%u", -1));
-	ft_printf(" %d\n", ft_printf("%u", -1));
-	printf("------------------------------\n");
-	printf(" %d : \n", printf("%x", 0x2a));
-	ft_printf(" %d\n", ft_printf("%x", 0x2a));
-	printf("------------------------------\n");
-	printf(" %d : \n", printf("%X", 0x2A));
-	ft_printf(" %d\n", ft_printf("%X", 0x2A));
-	printf("------------------------------\n");
-	printf(" %d : \n", printf("%p", ptr));
-	//ft_printf("%p\n", ptr);
-	//printf("%% : \n", 0,10);
-	//ft_printf("%%\n", 482);
+	ft_printf("------------------------------\n");
+	printf(" %d : \n", printf("%u", -99));
+	ft_printf(" %d\n", ft_printf("%u", -99));
+	ft_printf("------------------------------\n");
+	printf(" %d : \n", printf("%x", -26647485));
+	ft_printf(" %d\n", ft_printf("%x", -26647485));
+	ft_printf("------------------------------\n");
+	printf(" %d : \n", printf("%X", 42));
+	ft_printf(" %d\n", ft_printf("%X", 42));
+	ft_printf("------------------------------\n");
+	printf(" %d : \n", printf("%p", p));
+	ft_printf(" %d \n", ft_printf("%p", p));
+	ft_printf("------------------------------\n");
+	printf("%% %d : \n", printf("%%"));
+	ft_printf("%% %d \n", ft_printf("%%"));
 	return (0);
 }
