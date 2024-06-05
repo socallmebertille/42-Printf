@@ -6,13 +6,13 @@
 /*   By: saberton <saberton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 19:01:31 by saberton          #+#    #+#             */
-/*   Updated: 2024/06/05 15:28:40 by saberton         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:18:01 by saberton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_check_var(char format, va_list args)
+int	ft_check_var(char format, va_list args)
 {
 	if (format == 'c')
 		return (ft_putchar(va_arg(args, int)));
@@ -25,26 +25,26 @@ int ft_check_var(char format, va_list args)
 	else if (format == 'u')
 		return (ft_putnbr_base(DEC_BASE, va_arg(args, int), 10));
 	else if (format == 'x')
-		return (ft_putnbr_base(HEX_BASE_MIN,va_arg(args, int), 16));
+		return (ft_putnbr_base(HEX_BASE_MIN, va_arg(args, int), 16));
 	else if (format == 'X')
 		return (ft_putnbr_base(HEX_BASE_MAJ, va_arg(args, int), 16));
 	else if (format == '%')
 		return (ft_putchar('%'));
 	else
-		return (0);
+		return (-1);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int i; //i eme 
-	int len; //len ieme args
-	va_list args; //liste variable d'arguments
+	int		i;
+	int		len;
+	va_list	args;
 
 	if (!format)
 		return (0);
 	i = 0;
 	len = 0;
-	va_start(args, format); //init list de args apres format
+	va_start(args, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
@@ -53,17 +53,17 @@ int	ft_printf(const char *format, ...)
 			len += ft_putchar((char)format[i]);
 		i++;
 	}
-	va_end(args); //free la liste de args
+	va_end(args);
 	return (len);
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 #include <limits.h>
 
 int	main(void)
 {
-	char	*ptr = NULL;
-	unsigned long	nb = ULONG_MAX;
+	char	*ptr = "Hola que tal ?";
+	unsigned long	nb = LONG_MIN;
 	unsigned long	*p = &nb;
 
 	printf(" %d : \n", printf("%c", '0' - 256));
@@ -93,4 +93,4 @@ int	main(void)
 	printf("%% %d : \n", printf("%%"));
 	ft_printf("%% %d \n", ft_printf("%%"));
 	return (0);
-}
+}*/
