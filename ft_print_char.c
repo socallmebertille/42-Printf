@@ -6,7 +6,7 @@
 /*   By: saberton <saberton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:58:17 by saberton          #+#    #+#             */
-/*   Updated: 2024/06/05 18:20:20 by saberton         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:58:34 by saberton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ int	ft_putstr(char *str)
 
 	i = 0;
 	if (!str)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
+		return (ft_putstr("(null)"));
 	while (str[i])
 		ft_putchar(str[i++]);
 	return (i);

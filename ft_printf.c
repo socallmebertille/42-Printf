@@ -6,7 +6,7 @@
 /*   By: saberton <saberton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 19:01:31 by saberton          #+#    #+#             */
-/*   Updated: 2024/06/05 18:18:01 by saberton         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:07:19 by saberton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_check_var(char format, va_list args)
 	else if (format == 'p')
 		return (ft_print_ptr(HEX_BASE_MIN, va_arg(args, void *), 16));
 	else if (format == 'd' || format == 'i')
-		return (ft_putnbr(DEC_BASE, va_arg(args, int), 10));
+		return (ft_putnbr(va_arg(args, int)));
 	else if (format == 'u')
 		return (ft_putnbr_base(DEC_BASE, va_arg(args, int), 10));
 	else if (format == 'x')
@@ -31,7 +31,24 @@ int	ft_check_var(char format, va_list args)
 	else if (format == '%')
 		return (ft_putchar('%'));
 	else
-		return (-1);
+		return (0);
+}
+
+int	ft_check_space(const char *format)
+{
+	int	i;
+
+	i = 0;
+	while (format[i] == ' ')
+		i++;
+	if (format[i] == '%')
+	{
+		while (format[i + 1] == ' ')
+			i++;
+		if (!format[i + 1])
+			return (-1);
+	}
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -43,6 +60,8 @@ int	ft_printf(const char *format, ...)
 	if (!format)
 		return (0);
 	i = 0;
+	if (ft_check_space(format) == -1)
+		return (-1);
 	len = 0;
 	va_start(args, format);
 	while (format[i])
@@ -50,7 +69,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 			len += ft_check_var(format[++i], args);
 		else
-			len += ft_putchar((char)format[i]);
+			len += ft_putchar(format[i]);
 		i++;
 	}
 	va_end(args);
@@ -62,7 +81,7 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	char	*ptr = "Hola que tal ?";
+	char	*ptr = "Hola que tal";
 	unsigned long	nb = LONG_MIN;
 	unsigned long	*p = &nb;
 
@@ -90,7 +109,23 @@ int	main(void)
 	printf(" %d : \n", printf("%p", p));
 	ft_printf(" %d \n", ft_printf("%p", p));
 	ft_printf("------------------------------\n");
-	printf("%% %d : \n", printf("%%"));
-	ft_printf("%% %d \n", ft_printf("%%"));
+	printf(" %d : \n", printf("%%"));
+	ft_printf(" %d \n", ft_printf("%%"));
+	ft_printf("-----------test 1-------------------\n");
+	int i = printf("%");
+	int j = ft_printf("%");
+	printf("%d : %d\n", i, j);
+	ft_printf("---------${CFLAGS}----test 2-----------------\n");
+	ft_printf("ft_printf : %p%p%p%p\n");
+	printf("printf : %p%p%p%p\n");
+	ft_printf("-------------test 3-----------------\n");
+	printf("printf : '%i'", 11);
+	ft_printf("\n");
+	ft_printf("ft_printf : '%i'", 11);
+	ft_printf("\n");
+	ft_printf("-------------test 4-----------------\n");
+	printf("printf : gdlfkjgfd%%gjdflkgj");
+	ft_printf("\n");
+	ft_printf("ft_printf : gdlfkjgfd%%gjdflkgj\n");
 	return (0);
 }*/
