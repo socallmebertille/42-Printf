@@ -24,7 +24,7 @@ ${NAME}: ${OBJS}
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean: 
-	rm -rf ${OBJS} ${BONUS_OBJS}
+	rm -rf ${OBJS}
 
 fclean: clean
 	rm -rf ${NAME}
