@@ -6,7 +6,7 @@
 /*   By: saberton <saberton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 19:12:31 by saberton          #+#    #+#             */
-/*   Updated: 2024/06/06 13:05:46 by saberton         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:33:55 by saberton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdlib.h>
-# include <limits.h>
 
 # define U_MAX 4294967295
 # define DEC_BASE "0123456789"
